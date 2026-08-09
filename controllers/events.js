@@ -25,8 +25,34 @@ const index = async function (req, res) {
 }
 
 
+
+const update = async function (req, res) {
+  try {
+    const event = await Event.findById(req.params.eventId)
+
+    if (!event.owner.equals(req.user._id)) {
+      return res.status(403).send("You're not allowed to do that!")
+    }
+
+    const updatedEvent = await Event.findByIdAndUpdate(
+      req.params.eventId,
+      req.body,
+      { new: true }
+    )
+
+    updatedEvent._doc.owner = req.user
+    res.status(200).json(updatedEvent)
+  } catch (err) 
+  {
+    res.status(500).json({ err: err.message })
+  }
+}
+
+
+
 module.exports = 
 {
     create,
     index,
+    update,
 }
