@@ -10,12 +10,13 @@ const morgan = require('morgan')
 
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
+const verifyToken = require('./middleware/verify-token')
 const expensesCtrl = require('./controllers/expenses')
 
 mongoose.connect(process.env.MONGODB_URI)
 
-mongoose.connection.on('connected', () => {
-  console.log(`Connected to MongoDB ${mongoose.connection.name}. 🥭`)
+mongoose.connection.on('connected', function () {
+  console.log(`Connected to MongoDB ${mongoose.connection.name}. 🥭🥭🥭`)
 })
 
 app.use(cors())
@@ -23,11 +24,11 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 
-app.post('/expenses', verifyToken, expensesCtrl.create)
-app.get('/expenses', verifyToken, expensesCtrl.index)
+app.post('/expenses/create', verifyToken, expensesCtrl.create)
+app.get('/expenses/index', verifyToken, expensesCtrl.index)
 app.put('/expenses/:expenseId', verifyToken, expensesCtrl.update)
 
 
-app.listen(PORT, () => {
-  console.log(`The express app is ready on port ${PORT}! 😀`)
+app.listen(PORT, function (){
+  console.log(`The express app is ready on port ${PORT}! 💛💛💛💛`)
 })

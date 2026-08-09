@@ -1,6 +1,7 @@
 const express = require('express')
 const Expense = require('../models/expense')
 
+
 const create = async function (req, res) 
 {
   try {
@@ -47,8 +48,24 @@ const update = async function (req, res) {
   }
 }
 
+const deleteExpense = async function (req, res) {
+  try {
+    const expense = await Expense.findById(req.params.expenseId)
+
+    if (!expense.owner.equals(req.user._id)) {
+      return res.status(403).send("You're not allowed to do that!")
+    }
+
+    const deletedExpense = await Expense.findByIdAndDelete(req.params.expenseId)
+    res.status(200).json(deletedExpense)
+  } catch (err) {
+    res.status(500).json({ err: err.message })
+  }
+}
+
 module.exports = {
   create,
   index,
   update,
+  deleteExpense,
 }
