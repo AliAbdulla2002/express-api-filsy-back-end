@@ -64,6 +64,25 @@ const deleteEvent = async function (req, res) {
   }
 }
 
+const show = async function (req, res) {
+  try {
+    const event = await Event.findById(req.params.eventId).populate('owner')
+    
+    if (!event) {
+      return res.status(404).json({ err: 'Event not found' })
+    }
+    
+    if (!event.owner.equals(req.user._id)) {
+      return res.status(403).send("You're not allowed to do that!")
+    }
+    
+    res.status(200).json(event)
+  } catch (err) 
+  {
+    res.status(500).json({ err: err.message })
+  }
+}
+
 
 
 module.exports = 
@@ -72,4 +91,5 @@ module.exports =
     index,
     update,
     deleteEvent,
+    show,
 }
