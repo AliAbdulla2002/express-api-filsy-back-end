@@ -33,6 +33,7 @@ app.delete('/expenses/:expenseId', verifyToken, expensesCtrl.deleteExpense)
 
 app.post('/events', verifyToken, eventsCtrl.create)
 app.get('/events', verifyToken , eventsCtrl.index)
+app.put('events/:expenseId', verifyToken , eventsCtrl.update)
 
 app.listen(PORT, function (){
   console.log(`The express app is ready on port ${PORT}! 💛💛💛💛`)
