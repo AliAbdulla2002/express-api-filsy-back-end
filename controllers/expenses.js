@@ -9,7 +9,7 @@ const create = async function (req, res)
     expense._doc.owner = req.user
     res.status(201).json(expense)
   } catch (err) 
-  
+
   {
     res.status(500).json({ err: err.message })
   }
@@ -26,8 +26,29 @@ const index = async function (req, res) {
   }
 }
 
+const update = async function (req, res) {
+  try {
+    const expense = await Expense.findById(req.params.expenseId)
+    if (!expense.owner.equals(req.user._id)) 
+    {
+      return res.status(403).send("You're not allowed to do that!")
+    }
+
+    const updatedExpense = await Expense.findByIdAndUpdate(
+      req.params.expenseId,
+      req.body, 
+    { new: true }
+    )
+
+    updatedExpense._doc.owner = req.user
+    res.status(200).json(updatedExpense)
+  } catch (err) {
+    res.status(500).json({ err: err.message })
+  }
+}
 
 module.exports = {
   create,
   index,
+  update,
 }
