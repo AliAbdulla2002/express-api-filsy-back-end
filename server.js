@@ -23,7 +23,9 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 
-
+app.post('/expenses', verifyToken, expensesCtrl.create)
+app.get('/expenses', verifyToken, expensesCtrl.index)
+app.put('/expenses/:expenseId', verifyToken, expensesCtrl.update)
 
 
 app.listen(PORT, () => {
