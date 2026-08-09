@@ -12,6 +12,7 @@ const PORT = process.env.PORT ? process.env.PORT : "3000"
 
 const verifyToken = require('./middleware/verify-token')
 const expensesCtrl = require('./controllers/expenses')
+const eventsCtrl = require('./controllers/events')
 
 mongoose.connect(process.env.MONGODB_URI)
 
@@ -31,9 +32,6 @@ app.delete('/expenses/:expenseId', verifyToken, expensesCtrl.deleteExpense)
 
 
 app.post('/events/create', verifyToken, eventsCtrl.create)
-
-
-
 
 app.listen(PORT, function (){
   console.log(`The express app is ready on port ${PORT}! 💛💛💛💛`)
