@@ -27,6 +27,7 @@ app.use(morgan('dev'))
 app.post('/expenses/create', verifyToken, expensesCtrl.create)
 app.get('/expenses/index', verifyToken, expensesCtrl.index)
 app.put('/expenses/:expenseId', verifyToken, expensesCtrl.update)
+app.delete('/expenses/:expenseId', verifyToken, expensesCtrl.deleteExpense)
 
 
 app.listen(PORT, function (){
