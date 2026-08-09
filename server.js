@@ -10,16 +10,21 @@ const morgan = require('morgan')
 
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
+const expensesCtrl = require('./controllers/expenses')
+
 mongoose.connect(process.env.MONGODB_URI)
 
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}. 🥭`)
 })
 
-
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)
