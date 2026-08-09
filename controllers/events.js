@@ -13,8 +13,20 @@ const create = async function (req, res) {
   }
 }
 
+const index = async function (req, res) {
+  try {
+    const events = await Event.find({ owner: req.user._id }).populate('owner').sort({ createdAt: 'desc' })
+    res.status(200).json(events)
+  } catch (err)
+
+  {
+    res.status(500).json({ err: err.message })
+  }
+}
+
 
 module.exports = 
 {
     create,
+    index,
 }
