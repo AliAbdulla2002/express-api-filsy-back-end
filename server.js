@@ -34,6 +34,7 @@ app.delete('/expenses/:expenseId', verifyToken, expensesCtrl.deleteExpense)
 app.post('/events', verifyToken, eventsCtrl.create)
 app.get('/events', verifyToken , eventsCtrl.index)
 app.put('/events/:expenseId', verifyToken , eventsCtrl.update)
+app.delete('/events/:eventId', verifyToken, eventsCtrl.deleteEvent)
 
 
 app.listen(PORT, function (){
