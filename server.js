@@ -10,6 +10,10 @@ const morgan = require('morgan')
 
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
+
+
+const authCtrl = require('./controllers/auth')
+const usersCtrl = require('./controllers/users')
 const verifyToken = require('./middleware/verify-token')
 const expensesCtrl = require('./controllers/expenses')
 const eventsCtrl = require('./controllers/events')
@@ -23,6 +27,11 @@ mongoose.connection.on('connected', function () {
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
+
+
+app.get('/', (req, res) => {res.send('Hello just the test!')})
+app.post('/auth/sign-up', authCtrl.signUp)
+app.post('/auth/sign-in', authCtrl.signIn)
 
 
 app.post('/expenses', verifyToken, expensesCtrl.create)
