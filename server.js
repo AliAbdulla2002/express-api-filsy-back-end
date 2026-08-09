@@ -25,13 +25,14 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 
-app.post('/expenses/create', verifyToken, expensesCtrl.create)
-app.get('/expenses/index', verifyToken, expensesCtrl.index)
+app.post('/expenses', verifyToken, expensesCtrl.create)
+app.get('/expenses', verifyToken, expensesCtrl.index)
 app.put('/expenses/:expenseId', verifyToken, expensesCtrl.update)
 app.delete('/expenses/:expenseId', verifyToken, expensesCtrl.deleteExpense)
 
 
-app.post('/events/create', verifyToken, eventsCtrl.create)
+app.post('/events', verifyToken, eventsCtrl.create)
+app.get('/events', verifyToken , eventsCtrl.index)
 
 app.listen(PORT, function (){
   console.log(`The express app is ready on port ${PORT}! 💛💛💛💛`)
