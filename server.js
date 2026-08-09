@@ -38,6 +38,7 @@ app.post('/expenses', verifyToken, expensesCtrl.create)
 app.get('/expenses', verifyToken, expensesCtrl.index)
 app.put('/expenses/:expenseId', verifyToken, expensesCtrl.update)
 app.delete('/expenses/:expenseId', verifyToken, expensesCtrl.deleteExpense)
+app.get('/expenses/:expenseId', verifyToken ,expensesCtrl.show)
 
 
 app.post('/events', verifyToken, eventsCtrl.create)
