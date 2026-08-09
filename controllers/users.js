@@ -1,6 +1,7 @@
 const User = require('../models/user')
 
-const index = async function (req, res) {
+const index = async function (req, res) 
+{
    const users = await User.find()
    res.json(users)
 }

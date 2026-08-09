@@ -18,7 +18,8 @@ const eventsCtrl = require('./controllers/events')
 
 mongoose.connect(process.env.MONGODB_URI)
 
-mongoose.connection.on('connected', function () {
+mongoose.connection.on('connected', function () 
+{
   console.log(`Connected to MongoDB ${mongoose.connection.name}. 🥭🥭🥭`)
 })
 
@@ -47,6 +48,7 @@ app.get('/events/:eventId', verifyToken , eventsCtrl.show)
 
 
 
-app.listen(PORT, function (){
+app.listen(PORT, function ()
+{
   console.log(`The express app is ready on port ${PORT}! 💛💛💛💛`)
 })
