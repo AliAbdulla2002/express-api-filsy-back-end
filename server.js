@@ -10,8 +10,6 @@ const morgan = require('morgan')
 
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
-
-
 const authCtrl = require('./controllers/auth')
 const usersCtrl = require('./controllers/users')
 const verifyToken = require('./middleware/verify-token')
@@ -38,15 +36,14 @@ app.post('/expenses', verifyToken, expensesCtrl.create)
 app.get('/expenses', verifyToken, expensesCtrl.index)
 app.put('/expenses/:expenseId', verifyToken, expensesCtrl.update)
 app.delete('/expenses/:expenseId', verifyToken, expensesCtrl.deleteExpense)
-app.get('/expenses/:expenseId', verifyToken ,expensesCtrl.show)
+app.get('/expenses/:expenseId', verifyToken , expensesCtrl.show)
 
 
 app.post('/events', verifyToken, eventsCtrl.create)
 app.get('/events', verifyToken , eventsCtrl.index)
 app.put('/events/:expenseId', verifyToken , eventsCtrl.update)
 app.delete('/events/:eventId', verifyToken, eventsCtrl.deleteEvent)
-
-
+app.get('/events/:eventId', verifyToken , eventsCtrl.show)
 
 
 
