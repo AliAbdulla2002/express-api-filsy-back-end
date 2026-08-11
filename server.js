@@ -41,10 +41,10 @@ app.get('/expenses/:expenseId', verifyToken , expensesCtrl.show)
 
 
 app.post('/events', verifyToken, eventsCtrl.create)
-app.get('/events', verifyToken , eventsCtrl.index)
-app.put('/events/:expenseId', verifyToken , eventsCtrl.update)
+app.get('/events', verifyToken, eventsCtrl.index)
+app.put('/events/:eventId', verifyToken, eventsCtrl.update)
 app.delete('/events/:eventId', verifyToken, eventsCtrl.deleteEvent)
-app.get('/events/:eventId', verifyToken , eventsCtrl.show)
+app.get('/events/:eventId', verifyToken, eventsCtrl.show)
 
 
 
